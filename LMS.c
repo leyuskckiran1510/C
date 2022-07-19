@@ -31,6 +31,7 @@ exit ${?}
 #include<string.h>
 #include<time.h>
 #include "anisc.h"
+#include"calender_1.h"
 
 
 //checking for if the system is running in linux or windows and defining the includes accordingly
@@ -158,48 +159,20 @@ int login(char * username, char * password) {
     return 148;
 }
 
-void calander() {
-    //make a calander with the dates of the month
-    //the calander is made with the help of the ansice code
-    //referenced from  https://en.wikipedia.org/wiki/ANSI_escape_code
-    printf("\033[0J");
-    int count = 32;
-    int placex = 10;
-    int placey = 30;
-    char * week[7] = {
-        "SUN",
-        "MON",
-        "TUE",
-        "WED",
-        "THU",
-        "FRI",
-        "SAT"
-    };
-    int i, j;
-    for (i = 0; i < 7; i++) {
-        printf("\033[1;32m\033[%d;%dH%s", placex - 2, placey + i * 5, week[i]);
-        if (i == 6) {
-            printf("\033[38;2;220;255;20m\033[48;2;255;30;30m\033[%d;%dH%s  \x1b[0m", placex - 2, placey + i * 5, week[i]);
-        }
-        //placey+=10;
-    }
 
-    printf("\033[%d;%dH", placex, placey);
-    for (int i = 1; i < count; i++) {
-        if (i % 7 == 0) {
-            placex++;
-            printf("\033[38;2;220;255;20m\033[48;2;255;30;30m%2d   \033[0m", i);
-            printf("\033[%d;%dH", placex, placey);
-        } else {
-            printf("\033[1;32m%2d   \033[0m", i);
-        }
-    }
-    //move the cursor to the bottom left corner
-    printf("\033[%d;%dH", placex + 10, placey + 5);
-    printf("Press Any Key To Continue");
-    press(&count);
 
-}
+
+
+
+
+
+
+
+
+
+
+
+
 
 //function add_employee() is used to add the employee details to the user.txt file
 //with struct employee as parameter
@@ -407,7 +380,7 @@ void display_employees() {
         count++;
         if (count >= 10) {
             printf("\033[%d;%dH%s", 26, 5, "Press S to continue or any other key to exit");
-            press( & key);
+            press( &key);
             if (key == 's' || key == 'S') {
                 count = 0; //
                 printf("\033[%d;%dH%s", 26, 5, "                                            ");
@@ -799,7 +772,7 @@ void admin_screen( char * n, char * p) {
     printf("\033[14;40H\033[38;2;150;255;93m3|View All Employee\033[0m\n");
     printf("\033[15;40H\033[38;2;150;255;124m4|Delete Employee\033[0m\n");
     printf("\033[16;40H\033[38;2;150;255;124m5|Modify Employee\033[0m\n");
-    printf("\033[17;40H\033[38;2;150;255;155m6|Calander\033[0m\n");
+    printf("\033[17;40H\033[38;2;150;255;155m6|Calender\033[0m\n");
     printf("\033[20;40H\033[38;2;150;255;186mANY OTHER KEY TO EXIT\033[0m\n");
     printf("\033[0J");
     
@@ -810,7 +783,7 @@ void menu1(){
     printf("\033[1J\033[0J\033[1;1H\033[0m");
     printf("\033[10;50H\033[38;2;150;255;0mWelcome to Employee Management System\033[0m\n");
     printf("\033[11;40H\033[38;2;150;255;31mPress 1 to LOGIN\033[0m\n");
-    printf("\033[12;40H\033[38;2;150;255;155mPress 2 to DISPLAY CALANDER\033[0m\n");
+    printf("\033[12;40H\033[38;2;150;255;155mPress 2 to DISPLAY CALENDER\033[0m\n");
     printf("\033[13;40H\033[38;2;150;255;181mPress 3 to EXIT\033[0m\n");
     printf("\033[12;56H\033[38;2;50;255;255m");
 }
@@ -872,7 +845,7 @@ int main() {
                                 }
                                 else if(key3==54) {
                                     printf("\033[0J\033[1;1H\033[0m");
-                                    calander();
+                                    calendarconf();
                                 }
                                 else{
                                     key2=0;
@@ -899,7 +872,7 @@ int main() {
     }
     else if(key1==50) {
         printf("\033[0J\033[1;1H\033[0m");
-        calander();
+       calendarconf();
     }
     else if(key1==51) {
         printf("\033[0J\033[1;1H\033[0m");
