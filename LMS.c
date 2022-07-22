@@ -31,7 +31,7 @@ exit ${?}
 #include <string.h>
 #include <time.h>
 #include "anisc.h"
-
+#include"calender_1.h"
 // checking for if the system is running in linux or windows and defining the includes accordingly
 // and different functions are used for linux and windows
 
@@ -84,6 +84,8 @@ void press(int *key)
 #define title(k) printf("\033]0;%s\007", k)
 #define ch printf("\033[?25l"); // hiding cursor
 #define cs printf("\033[?25h"); // showing cursor
+
+void calendarconf();
 
 struct employe
 {
@@ -164,50 +166,7 @@ int login(char *username, char *password)
 
 void calander()
 {
-    // make a calander with the dates of the month
-    // the calander is made with the help of the ansice code
-    // referenced from  https://en.wikipedia.org/wiki/ANSI_escape_code
-    printf("\033[0J");
-    int count = 32;
-    int placex = 10;
-    int placey = 30;
-    char *week[7] = {
-        "SUN",
-        "MON",
-        "TUE",
-        "WED",
-        "THU",
-        "FRI",
-        "SAT"};
-    int i, j;
-    for (i = 0; i < 7; i++)
-    {
-        printf("\033[1;32m\033[%d;%dH%s", placex - 2, placey + i * 5, week[i]);
-        if (i == 6)
-        {
-            printf("\033[38;2;220;255;20m\033[48;2;255;30;30m\033[%d;%dH%s  \x1b[0m", placex - 2, placey + i * 5, week[i]);
-        }
-        // placey+=10;
-    }
-
-    printf("\033[%d;%dH", placex, placey);
-    for (int i = 1; i < count; i++)
-    {
-        if (i % 7 == 0)
-        {
-            placex++;
-            printf("\033[38;2;220;255;20m\033[48;2;255;30;30m%2d   \033[0m", i);
-            printf("\033[%d;%dH", placex, placey);
-        }
-        else
-        {
-            printf("\033[1;32m%2d   \033[0m", i);
-        }
-    }
-    // move the cursor to the bottom left corner
-    printf("\033[%d;%dH", placex + 10, placey + 5);
-    printf("Press Any Key To Continue");
-    press(&count);
+   calendarconf();
 }
 
 // function add_employee() is used to add the employee details to the user.txt file
